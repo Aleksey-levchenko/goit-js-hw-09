@@ -28,13 +28,16 @@ function onSubmitForm(event) {
 
   const formData = new FormData(event.target);
   const formDataObj = Object.fromEntries(formData.entries());
-  if (validateFormFields(formDataObj)) {
-    console.log('submit', formDataObj);
 
-    localStorage.removeItem(formState);
-
-    event.target.reset();
+  if (!validateFormFields(formDataObj)) {
+    alert('Заповніть усі поля'); // Выводим ошибку, если поля не заполнены
+    return;
   }
+  console.log('submit', formDataObj);
+
+  localStorage.removeItem(formState);
+
+  event.target.reset();
 }
 
 function validateFormFields(formDataObj) {
